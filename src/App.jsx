@@ -1,19 +1,25 @@
 import React from "react";
-import './App.css'
+import "./App.css"; 
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Menu from "./pages/Menu";
 
-const items = ["Mathematics", "Informatics", "PH", "Biology", "Chemistry"];
 
-function Lessons() {
+
+function App() {
   return (
-    <div style={{ padding: "60px", fontFamily: "Arial" }}>
-      <h2>My School lessons</h2>
-      <ul>
-        {items.map((element, index) => (
-          <li key={index}>{element}</li>
-        ))}
-      </ul>
-    </div>
+    <div className="body-style">
+      <Routes>
+        <Route path="/" element={<Home />}  />
+        <Route path="/menu" element={<Menu />} /> 
+      </Routes>
+      </div>
   );
 }
 
-export default Lessons;
+export default App;
+
+const link = document.createElement("link");
+link.href = "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap";
+link.rel = "stylesheet";
+document.head.appendChild(link);
