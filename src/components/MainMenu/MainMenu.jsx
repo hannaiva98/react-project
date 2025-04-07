@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./MainMenu.css";
 import image1 from './img/IMAGE (7).png';
 import image2 from './img/IMAGE (8).png';
@@ -6,27 +5,11 @@ import image3 from './img/IMAGE (9).png';
 import image4 from './img/IMAGE (10).png';
 import image5 from './img/IMAGE (11).png';
 import image6 from './img/IMAGE (12).png';
+import PhoneTooltip from "./PhoneTooltip";
 
 
-const PhoneTooltip = () => {
-  const [isHovered, setIsHovered] = useState(false);
 
-  return (
-    <span
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="hint_text">
-      phone
-      {isHovered && (
-        <div className="hovered-text">
-          Tel: 8 000 000 0000
-        </div>
-      )
-      }
-    </span>
-  );
-};
-
+<PhoneTooltip />
 
 const MainMenu = () => {
         const menuItems = [
