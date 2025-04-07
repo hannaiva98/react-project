@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from "../components/Header";
-import MainMenu from "../components/MainMenu";
-import Footer from "../components/Footer";
+import Header from "../components/Header/Header";
+import MainMenu from "../components/MainMenu/MainMenu";
+import Footer from "../components/Footer/Footer";
 
 
 const Menu = () => {

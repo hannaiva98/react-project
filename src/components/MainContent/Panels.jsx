@@ -1,6 +1,7 @@
 import React from "react";
-import logostar from '../img/trustpilot-logo.png';
-import mainpic from '../img/IMAGE (5).png';
+import "./MainContent.css";
+import logostar from "./img/trustpilot-logo copy.png";
+import mainpic from "./img/IMAGE (5).png";
 
 
 const Panels = () => {
