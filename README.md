@@ -1,2 +1,2 @@
-#Homework 1
-#Create repository, remove unnecessary code and upload the project to git
+#Homework2
+#I created 2 pages of the site. The first page is the main page of the site. It includes the Header component, Main part, Footer. The second page contains the Header component, List of things of the product card, Footer. I also managed to implement the appearance of a hint by phone number.

@@ -1,0 +1,227 @@
+.maininfmenu{
+    background-image: url('./img/BG Shape Content.png');
+    background-repeat: no-repeat; 
+    background-size: cover;
+    background-position: center;
+    width: auto;
+    height: 1336px;
+    opacity: 87%;
+  }
+  .contentmenu{
+    width: 1200px;
+    height: 1056px;
+    padding: 140.45px 120px;
+  }
+  .main-text-menu{
+    width: 670px;
+    height: 159px;
+    margin-left: 265px;
+    margin-bottom: 50.45px;
+  }
+  .main-text-menu-1{
+    width: 442px;
+    height: 55px;
+    font-size: 50px;
+    margin: 13.55px 114px;
+    padding-left: 19px;
+    text-align: center;
+    line-height: 55px;
+    letter-spacing: 1.65px;
+    color: #35B8BE;
+  }
+  .main-text-menu-2{
+    width: 466px;
+    height: 54px;
+    margin: 0px;
+  }
+  .main-text-menu-2{
+    font-size: 16px;
+    line-height: 27px;
+    letter-spacing: 0.36px;
+    text-align: center;
+    padding-top: 26px;
+    padding-left: 95px;
+    color: #546285;
+  }
+  .filter-buttons{
+    width: auto;
+    height: 52px;
+    margin-left: 362px;
+  }
+  .main-button-menu{
+    width: 147px;
+    height: 52px;
+    margin-left: 30px;
+    border: 1px;
+    padding: 0px;
+    border-radius: 6px;
+    background-color: #61728333;
+    opacity: 20%;
+  }
+  .main-button-menu-unique{
+    width: 147px;
+    height: 52px;
+    border: 1px;
+    border-radius: 6px;
+    padding: 0px;
+    background-color: #35B8BE;
+  }
+  .main-button-menu-unique p{
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    text-align: center;
+    margin: 0%;
+    color: #FFFFFF;
+  }
+  
+  .main-button-menu p{
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    text-align: center;
+    margin: 0%;
+    color: #222222;
+  }
+  .buttons-with-list{
+    width: 1200px;
+    height: 752px;
+  }
+  .menu-list{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    list-style: none;
+    margin-top: 40.45px;
+    padding: 0.45px 10px;
+  }
+  .order-card{
+    width: 580px;
+    height: 200px;
+    display: flex;
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    border: 1px solid rgba(53, 184, 190, 0.15);
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+  .menu-item img{
+    width: 120px;
+    height: 120px;
+    padding-top: 40px;
+    padding-left: 26px;
+  }
+  .information-order{
+    width: 378px;
+    height: 147px;
+    margin: 26.95px 30px;
+  }
+  .name-price{
+    width: 378px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .name-price h2{
+    margin: 8.05px 0px 0px;
+    font-family: 'Inter', sans-serif;
+    font-weight:400;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0.6px;
+    color: #08090A;
+  }
+  .name-price p{
+    margin: 10.05px 0px 0px;
+    font-weight:400;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    color: #35B8BE;
+  }
+  .description p{
+    margin: 6.05px 0px 7.95px 0px;
+    font-family: 'Inter', sans-serif;
+    font-weight:400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.32px;
+    color: #08090A;
+  }
+  .buttons-with-counter{
+    width: 378px;
+    height: 45px;
+  }
+  .buttons-with-counter .counter_order{
+    width: 60px;
+    height: 45px;
+    margin-top: 0.05px;
+    padding: 0px;
+    border-radius: 6px;
+    border: 1px solid #DDDDDD;
+    background-color: #FAFAFA;
+    font-family: 'Inter', sans-serif;
+    font-weight:400;
+    font-size: 16px;
+    line-height: 27px;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #000000;
+  }
+  .buttons-with-counter .add-to-order{
+    margin-left: 8px;
+    width: 147px;
+    height: 45px;
+    margin-top: 0.05px;
+    padding: 0px;
+    border: none;
+    border-radius: 6px;
+    background-color: #35B8BE;
+    font-family: 'Inter', sans-serif;
+    font-weight:400;
+    font-size: 16px;
+    line-height: 27px;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+  .additional-order{
+    width: 147px;
+    height: 52px;
+    margin-top: 44.55px;
+    margin-left: 544px;
+    padding: 0px;
+    border: none;
+    border-radius: 6px;
+    background-color: #35B8BE;
+    font-family: 'Inter', sans-serif;
+    font-weight:400;
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #FFFFFF;
+  }
+  .hint_text {
+    position: relative;
+    cursor: pointer;
+    color: #35B8BE;
+  }
+  
+  .hovered-text {
+    position: absolute;
+    top: -30px;
+    left: 0px;
+    background-color: #546285;
+    color: #DDDDDD;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 100;
+  }
+  
