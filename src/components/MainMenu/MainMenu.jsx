@@ -9,8 +9,6 @@ import PhoneTooltip from "./PhoneTooltip";
 
 
 
-<PhoneTooltip />
-
 const MainMenu = () => {
         const menuItems = [
                 { id: 1, name: "Burger Dreams", description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", price: "$ 9.20 USD", image: image1, counter: 1, button: "Add to card" },
