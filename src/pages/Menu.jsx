@@ -4,11 +4,11 @@ import MainMenu from "../components/MainMenu/MainMenu";
 import Footer from "../components/Footer/Footer";
 
 
-const Menu = () => {
+
+const Menu = ({ setCartCount }) => {
     return (
         <>
-          <Header />
-          <MainMenu />
+          <MainMenu setCartCount={setCartCount} />
             <Footer />
           </>
       );

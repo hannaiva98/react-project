@@ -1,13 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 import FooterInf from "./FooterInf";
 
 
-const Footer = () => {
+class Footer extends Component {
+  render(){
   return (
     <footer>
         <FooterInf />
       </footer>
   );
-};
+}
+}
 
 export default Footer;

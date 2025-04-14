@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
-
+import Header from "./components/Header/Header"; 
 
 
 function App() {
+  const [cartCount, setCartCount] = useState(0);
   return (
     <div className="body-style">
+      <Header cartCount={cartCount} />
       <Routes>
         <Route path="/" element={<Home />}  />
-        <Route path="/menu" element={<Menu />} /> 
+        <Route path="/menu" element={<Menu setCartCount={setCartCount} /> }/>
       </Routes>
       </div>
   );
