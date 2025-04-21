@@ -1,21 +1,33 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Header from "./components/Header/Header"; 
 
 
-function App() {
-  const [cartCount, setCartCount] = useState(0);
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cartCount: 0,
+    };
+    this.setCartCount = this.setCartCount.bind(this);
+  }
+
+  setCartCount(newCount) {
+    this.setState({ cartCount: newCount });
+  }
+  render(){
   return (
     <div className="body-style">
-      <Header cartCount={cartCount} />
+      <Header cartCount={this.state.cartCount} />
       <Routes>
         <Route path="/" element={<Home />}  />
-        <Route path="/menu" element={<Menu setCartCount={setCartCount} /> }/>
+        <Route path="/menu" element={<Menu setCartCount={this.setCartCount} /> }/>
       </Routes>
       </div>
   );
+}
 }
 
 export default App;

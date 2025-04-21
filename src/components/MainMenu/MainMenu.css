@@ -142,14 +142,22 @@
     letter-spacing: 0%;
     color: #35B8BE;
   }
-  .description p{
+  .description{
     margin: 6.05px 0px 7.95px 0px;
+  }
+  .ellipsis {
     font-family: 'Inter', sans-serif;
     font-weight:400;
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0.32px;
     color: #08090A;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;     
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 2;
   }
   .buttons-with-counter{
     width: 378px;

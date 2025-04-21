@@ -3,6 +3,7 @@ import "./MainMenu.css";
 import PhoneTooltip from "./PhoneTooltip";
 
 
+const items_increment = 6;
 
 class MainMenu extends Component {
   constructor(props){
@@ -41,9 +42,10 @@ class MainMenu extends Component {
     });
   }
 
+
   handleSeeMore = () => {
     this.setState(prevState => ({
-      visibleItemsCount: prevState.visibleItemsCount + 6,
+      visibleItemsCount: prevState.visibleItemsCount + items_increment,
     }));
   };
 
@@ -108,7 +110,7 @@ class MainMenu extends Component {
               <p>$ {item.price} USD</p>
               </div>
               <div className="description">
-              <p>{item.instructions.length > 90 ? item.instructions.slice(0, 90) + '...' : item.instructions}</p>
+              <p className="ellipsis">{item.instructions}</p>
               </div>
               <div className="buttons-with-counter">
               <button className="counter_order">{item.count}</button>
