@@ -1,2 +1,2 @@
-#Homework2
-#I created 2 pages of the site. The first page is the main page of the site. It includes the Header component, Main part, Footer. The second page contains the Header component, List of things of the product card, Footer. I also managed to implement the appearance of a hint by phone number.
+#Homework3
+#In this lab, each component was rewritten using a class approach. Information was loaded using fetch. The See more button was processed. A counter was added and a shopping cart was made. Links to google pages were added to the template.

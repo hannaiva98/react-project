@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import "./MainContent.css";
 import logostar from "./img/trustpilot-logo copy.png";
 import mainpic from "./img/IMAGE (5).png";
 
 
-const Panels = () => {
+class Panels extends Component {
+  render(){
   return (
     <div className="figure">
     <div className='main-left'>
@@ -24,6 +25,7 @@ const Panels = () => {
     </div>
   </div>
   );
-};
+}
+}
 
 export default Panels;
