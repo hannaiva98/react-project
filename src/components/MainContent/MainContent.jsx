@@ -1,15 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import Panels from "./Panels";
 
 
-class MainContent extends Component {
-  render(){
+const MainContent = () => {
   return (
     <main>
         <Panels />
       </main>
   );
-}
-}
+};
 
 export default MainContent;

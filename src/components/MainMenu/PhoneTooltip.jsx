@@ -1,28 +1,17 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./MainMenu.css";
 
-class PhoneTooltip extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      isHovered: false,
-    };
-  }
-  handleMouseEnter = () => {
-    this.setState({ isHovered: true });
-  };
+const PhoneTooltip = () => {
+  const [isHovered, setIsHovered] = useState(false);
 
-  handleMouseLeave = () => {
-    this.setState({ isHovered: false });
-  };
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
 
-  render() {
-    const { isHovered } = this.state;
   return (
     <span
       className="hint_text"
-      onMouseEnter={this.handleMouseEnter}
-      onMouseLeave={this.handleMouseLeave}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       phone
       {isHovered && (
@@ -33,7 +22,6 @@ class PhoneTooltip extends Component {
       }
     </span>
   );
-}
-}
+};
 
 export default PhoneTooltip;
