@@ -1,2 +1,2 @@
-# Homework 5
-In this lab we implemented styled components, configured the "Place an order" button so that it is currently inactive. The rating (stars) should be hardcoded. Also, it is necessary to create a custom useFetch hook.
+# Homework 6
+I implemented a login page using Firebase, allowing users to authenticate and gain access to protected pages. I also configured route protection through PrivateRoute, ensuring access is granted only to logged-in users.

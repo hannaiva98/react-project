@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./img/IMAGE.png";
 import basket from "./img/Frame (3).png";
+import { NavLink } from "react-router-dom";
 
 const HeaderWrapper = styled.header`
   font-family: 'Inter', sans-serif;
@@ -41,9 +41,8 @@ const NavItem = styled.li`
     letter-spacing: 0px;
     padding: 20px 16px;
 
-    &#click-style {
-      padding: 20px 16px;
-      color: #35b8be;
+    &.active {
+    color: #35b8be;
     }
   }
 `;
@@ -95,24 +94,24 @@ class Header extends Component {
           <Logo src={logo} alt="Logo" />
           <NavList>
             <NavItem>
-              <Link to="/" id="click-style">
+              <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}> 
                 Home
-              </Link>
+              </NavLink>
             </NavItem>
             <NavItem>
-              <Link to="/menu" className="nav-style">
+              <NavLink to="/menu" className={({ isActive }) => (isActive ? "active" : "")}> 
                 Menu
-              </Link>
+              </NavLink>
             </NavItem>
             <NavItem>
-              <Link to="/" className="nav-style">
+              <NavLink to="/company" className={({ isActive }) => (isActive ? "active" : "")}> 
                 Company
-              </Link>
+              </NavLink>
             </NavItem>
             <NavItem>
-              <Link to="/" className="nav-style">
+              <NavLink to="/login" className={({ isActive }) => (isActive ? "active" : "")}> 
                 Login
-              </Link>
+              </NavLink>
             </NavItem>
           </NavList>
           <BasketContainer>
