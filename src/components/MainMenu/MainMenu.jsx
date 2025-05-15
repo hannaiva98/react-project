@@ -1,22 +1,19 @@
-import React, { Component } from "react";
+import React, { useState, useEffect }  from "react";
 import "./MainMenu.css";
 import PhoneTooltip from "./PhoneTooltip";
 
 
-const items_increment = 6;
+const ITEMS_INCREMENT = 6;
 
-class MainMenu extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      menuItems: [],
-      isLoading: true,
-      error: null,
-      visibleItemsCount: 6,
-      cartCount: 0,
-    };
-  }
-  componentDidMount() {
+const MainMenu = ({ setCartCount }) => {
+  const [menuItems, setMenuItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [visibleItemsCount, setVisibleItemsCount] = useState(6);
+  const [selectedCategory, setSelectedCategory] = useState('Dessert');
+
+
+useEffect(() => {
     fetch("https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals")
       .then(response => {
         if (!response.ok) {
@@ -26,63 +23,62 @@ class MainMenu extends Component {
       })
       .then(data => {
         const updatedData = data.map(item => ({ ...item, count: 0 }));
-        this.setState({ menuItems: updatedData, isLoading: false });
+        setMenuItems(updatedData);
+        setIsLoading(false);
       })
       .catch(error => {
-        this.setState({ error, isLoading: false });
+        setError(error);
+        setIsLoading(false);
       });
 
-  fetch("https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/orders")
-    .then(res => res.json())
-    .then(data => {
-      console.log("Загрузка заказов:", data);
-    })
-    .catch(err => {
-      console.error("Ошибка при загрузке заказов:", err);
-    });
-  }
+      fetch("https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/orders")
+      .then(res => res.json())
+      .then(data => {
+        console.log("Загрузка заказов:", data);
+      })
+      .catch(err => {
+        console.error("Ошибка при загрузке заказов:", err);
+      });
+  }, []);
 
 
-  handleSeeMore = () => {
-    this.setState(prevState => ({
-      visibleItemsCount: prevState.visibleItemsCount + items_increment,
-    }));
+  const handleSeeMore = () => {
+    setVisibleItemsCount(prevCount => prevCount + ITEMS_INCREMENT);
   };
 
-  handleAddToCart = (id) => {
-    this.setState(prevState => {
-      const updatedMenuItems = prevState.menuItems.map(item =>
-        item.id === id ? { ...item, count: item.count + 1 } : item
-      );
-      
-      const newCartCount = updatedMenuItems.reduce((total, item) => total + item.count, 0);
-  
-      if (this.props.setCartCount) {
-        this.props.setCartCount(newCartCount);
-      }
-  
-      return { menuItems: updatedMenuItems };
-    });
-  };
-  
+  const handleAddToCart = (id) => {
+    const updatedMenuItems = menuItems.map(item =>
+      item.id === id ? { ...item, count: item.count + 1 } : item
+    );
 
-  getTotalCartCount = () => {
-  return this.state.menuItems.reduce((total, item) => total + item.count, 0);
+    const newCartCount = updatedMenuItems.reduce((total, item) => total + item.count, 0);
+
+    if (setCartCount) {
+      setCartCount(newCartCount);
+    }
+
+    setMenuItems(updatedMenuItems);
+  };
+
+
+  const filteredItems = selectedCategory
+  ? menuItems.filter(item => item.category === selectedCategory) 
+  : menuItems;
+
+if (isLoading) {
+  return <div className="maininfmenu"><p>Загрузка меню...</p></div>;
+}
+
+if (error) {
+  return <div className="maininfmenu"><p>Ошибка: {error.message}</p></div>;
+}
+
+const visibleItems = filteredItems.slice(0, visibleItemsCount); 
+
+const handleCategoryChange = (category) => {
+  setSelectedCategory(category);
+  setVisibleItemsCount(6);
 };
-
-  render() {
-    const { menuItems, isLoading, error, visibleItemsCount } = this.state;
-
-
-    if (isLoading) {
-      return <div className="maininfmenu"><p>Загрузка меню...</p></div>;
-    }
-
-    if (error) {
-      return <div className="maininfmenu"><p>Ошибка: {error.message}</p></div>;
-    }
-
-  const visibleItems = menuItems.slice(0, visibleItemsCount);  
             
   return (
         <div className='maininfmenu'>
@@ -93,9 +89,15 @@ class MainMenu extends Component {
             </div>
             <div className="buttons-with-list">
             <div className="filter-buttons">
-                <button className="main-button-menu-unique"><p>Desert</p></button>
-                <button className="main-button-menu"><p>Dinner</p></button>
-                <button className="main-button-menu"><p>Breakfast</p></button>
+            <button className={`main-button-menu ${selectedCategory === 'Dessert' ? 'active' : ''}`} onClick={() => handleCategoryChange('Dessert')}>
+              <p>Dessert</p>
+            </button>
+            <button className={`main-button-menu ${selectedCategory === 'Dinner' ? 'active' : ''}`} onClick={() => handleCategoryChange('Dinner')}>
+              <p>Dinner</p>
+            </button>
+            <button className={`main-button-menu ${selectedCategory === 'Breakfast' ? 'active' : ''}`} onClick={() => handleCategoryChange('Breakfast')}>
+              <p>Breakfast</p>
+            </button>
             </div>
             <ul className="menu-list">
           {visibleItems.map(item => (
@@ -114,7 +116,7 @@ class MainMenu extends Component {
               </div>
               <div className="buttons-with-counter">
               <button className="counter_order">{item.count}</button>
-                <button className="add-to-order" onClick={() => this.handleAddToCart(item.id)}>
+                <button className="add-to-order" onClick={() => handleAddToCart(item.id)}>
                   Add to card
                 </button>
               </div>
@@ -124,14 +126,14 @@ class MainMenu extends Component {
           ))}
         </ul>
         </div>
-        {visibleItemsCount < menuItems.length && (
+        {visibleItemsCount < filteredItems.length && (
           <div className="see-more-wrapper">
-            <button className="additional-order" onClick={this.handleSeeMore}>See more</button>
+            <button className="additional-order" onClick={handleSeeMore}>See more</button>
           </div>
-      )}
+        )}
             </div>
         </div>
 );
-}
-}
+};
+
 export default MainMenu;

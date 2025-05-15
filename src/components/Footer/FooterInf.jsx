@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./Footer.css";
 import logo from './img/IMAGE.png';
 import logocopy1 from './img/Frame (6).png';
@@ -6,8 +6,7 @@ import logocopy2 from './img/Frame (7).png';
 import logocopy3 from './img/Frame (8).png';
 
 
-class FooterInf extends Component {
-  render(){
+const FooterInf = () => {
   return (
     <footer>
         <div className='footer-main'>
@@ -55,9 +54,7 @@ class FooterInf extends Component {
             </div>
         </div>
       </footer>
-
   );
-}
-}
+};
 
 export default FooterInf;

@@ -1,4 +1,4 @@
-import React,{ Component } from "react";
+import React from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import logo from './img/IMAGE.png';
@@ -6,9 +6,7 @@ import basket from './img/Frame (3).png';
 
 
 
-class Header extends Component {
-  render(){
-    const { cartCount } = this.props;
+const Header = ({ cartCount }) => {
   return (
     <header>
       <nav>
@@ -28,7 +26,6 @@ class Header extends Component {
     </nav>
     </header>
   );
-}
-}
+};
 
 export default Header;

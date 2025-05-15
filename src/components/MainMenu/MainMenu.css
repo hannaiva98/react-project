@@ -57,7 +57,7 @@
     background-color: #61728333;
     opacity: 20%;
   }
-  .main-button-menu-unique{
+  .main-button-menu.active{
     width: 147px;
     height: 52px;
     border: 1px;
@@ -66,7 +66,7 @@
     background-color: #35B8BE;
     opacity: 1;
   }
-  .main-button-menu-unique p{
+  .main-button-menu.active p{
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 16px;

@@ -1,2 +1,2 @@
-#Homework3
-#In this lab, each component was rewritten using a class approach. Information was loaded using fetch. The See more button was processed. A counter was added and a shopping cart was made. Links to google pages were added to the template.
+#Homework 4
+#In this lab, each component was redesigned using a functional approach. Also, a filter was made for the categories 'Dessert', 'Dinner', 'Breakfast'. The 'Dessert' button was rewritten.

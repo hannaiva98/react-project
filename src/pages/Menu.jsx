@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from "../components/Header/Header";
 import MainMenu from "../components/MainMenu/MainMenu";
 import Footer from "../components/Footer/Footer";
 
@@ -11,7 +10,7 @@ const Menu = ({ setCartCount }) => {
           <MainMenu setCartCount={setCartCount} />
             <Footer />
           </>
-      );
+  );
 };
 
 export default Menu;
