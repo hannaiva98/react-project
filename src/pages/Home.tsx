@@ -1,9 +1,8 @@
-import React from "react";
+import React, { FC } from "react";
 import MainContent from "../components/MainContent/MainContent"; 
 import Footer from "../components/Footer/Footer";
 
-
-const Home = () => {
+const Home: FC = () => {
   return (
     <>
       <MainContent />
@@ -11,6 +10,5 @@ const Home = () => {
     </>
   );
 };
-  
-  export default Home;
-  
+
+export default Home;

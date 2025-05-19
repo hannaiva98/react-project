@@ -1,6 +1,6 @@
 import React from "react";
 
-const PrivateUser = () => {
+const PrivateUser: React.FC = () => {
   return (
     <div>
       <h2>Private User Page!</h2>
