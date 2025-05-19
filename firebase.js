@@ -4,19 +4,17 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBcEsnGJGryp2saF_Yx22ZY65oU1Yr1sKY",
-  authDomain: "react-project-hanna.firebaseapp.com",
-  projectId: "react-project-hanna",
-  storageBucket: "react-project-hanna.firebasestorage.app",
-  messagingSenderId: "170708247568",
-  appId: "1:170708247568:web:c6d4bc1f02d01ec4089695",
-  measurementId: "G-DRGVYM2HT1",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-const Analytics = getAnalytics(app); 
+export const analytics = getAnalytics(app);
