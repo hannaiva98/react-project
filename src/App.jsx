@@ -3,8 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
+import MainLoginWrapper from "./pages/Login";
 import Header from "./components/Header/Header";
 import TestFetchComponent from "./components/TestFetchComponent";
+import PrivateUser from "./components/Login/PrivateUser";
+import PrivateRoute from "./components/Login/PrivateRoute";
+
 
 const AppContainer = styled.div`
   background: #ffffff;
@@ -38,6 +42,13 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu setCartCount={setCartCount} />} />
+        <Route path="/login" element={<MainLoginWrapper />} />
+        <Route path="/privateuser" element={ 
+          <PrivateRoute>
+            <PrivateUser />
+          </PrivateRoute>
+                  }
+        />
       </Routes>
       <TestFetchComponent />
     </AppContainer>
