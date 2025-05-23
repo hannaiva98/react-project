@@ -4,7 +4,8 @@ import useFetch from '../hooks/useFetch';
 interface Meal {
   id: string;
   name: string;
-  [key: string]: any;
+  price?: number;
+  description?: string;
 }
 
 const TestFetchComponent: React.FC = () => {
@@ -16,7 +17,7 @@ const TestFetchComponent: React.FC = () => {
     100
   );
 
-  // Приведение типа вручную (если уверены в типе)
+
   const meals = data as Meal[] | null;
 
   const handleFetch = () => {
