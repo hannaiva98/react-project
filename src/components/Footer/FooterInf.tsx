@@ -5,7 +5,6 @@ import logocopy1 from "./img/Frame (6).png";
 import logocopy2 from "./img/Frame (7).png";
 import logocopy3 from "./img/Frame (8).png";
 
-
 const FooterMain = styled.div`
   width: 1200px;
   height: auto;
@@ -127,7 +126,7 @@ const LogoCopy3 = styled.img`
   padding-left: 24px;
 `;
 
-const FooterInf = () => {
+const FooterInf: React.FC = () => {
   return (
     <FooterMain>
       <FooterMain1>
@@ -147,22 +146,22 @@ const FooterInf = () => {
         <FooterMain2>
           <FooterList>TEMPLATE
             <FooterListItem>
-              <FooterLink href="https://www.google.com/" target="_blank">
+              <FooterLink href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
                 Style Guide
               </FooterLink>
             </FooterListItem>
             <FooterListItem>
-              <FooterLink href="https://www.google.com/" target="_blank">
+              <FooterLink href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
                 Changelog
               </FooterLink>
             </FooterListItem>
             <FooterListItem>
-              <FooterLink href="https://www.google.com/" target="_blank">
+              <FooterLink href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
                 Licence
               </FooterLink>
             </FooterListItem>
             <FooterListItem>
-              <FooterLink href="https://www.google.com/" target="_blank">
+              <FooterLink href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
                 Webflow University
               </FooterLink>
             </FooterListItem>

@@ -42,7 +42,7 @@ const NavItem = styled.li`
     padding: 20px 16px;
 
     &.active {
-    color: #35b8be;
+      color: #35b8be;
     }
   }
 `;
@@ -85,31 +85,37 @@ const Counter = styled.span`
   justify-content: center;
 `;
 
-class Header extends Component {
+
+interface HeaderProps {
+  cartCount: number;
+}
+
+class Header extends Component<HeaderProps> {
   render() {
     const { cartCount } = this.props;
+
     return (
       <HeaderWrapper>
         <Nav>
           <Logo src={logo} alt="Logo" />
           <NavList>
             <NavItem>
-              <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}> 
+              <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
                 Home
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/menu" className={({ isActive }) => (isActive ? "active" : "")}> 
+              <NavLink to="/menu" className={({ isActive }) => (isActive ? "active" : "")}>
                 Menu
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/company" className={({ isActive }) => (isActive ? "active" : "")}> 
+              <NavLink to="/company" className={({ isActive }) => (isActive ? "active" : "")}>
                 Company
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/login" className={({ isActive }) => (isActive ? "active" : "")}> 
+              <NavLink to="/login" className={({ isActive }) => (isActive ? "active" : "")}>
                 Login
               </NavLink>
             </NavItem>

@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
 import useFetch from '../hooks/useFetch';
 
-const TestFetchComponent = () => {
-  const [shouldFetch, setShouldFetch] = useState(false);
+interface Meal {
+  id: string;
+  name: string;
+  price?: number;
+  description?: string;
+}
+
+const TestFetchComponent: React.FC = () => {
+  const [shouldFetch, setShouldFetch] = useState<boolean>(false);
 
   const { data, loading, error } = useFetch(
     'https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals',
     shouldFetch,
     100
   );
+
+
+  const meals = data as Meal[] | null;
 
   const handleFetch = () => {
     setShouldFetch(true);
@@ -27,10 +37,10 @@ const TestFetchComponent = () => {
       </div>
       {loading && <p>Идет загрузка...</p>}
       {error && <p style={{ color: 'red' }}>Ошибка: {error}</p>}
-      {data && (
+      {meals && (
         <div>
           <h2>Полученные данные</h2>
-          <pre>{JSON.stringify(data[0], null, 2)}</pre>
+          <pre>{JSON.stringify(meals[0], null, 2)}</pre>
         </div>
       )}
     </div>

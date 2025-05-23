@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FC } from "react";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import Home from "./pages/Home";
@@ -8,7 +8,6 @@ import Header from "./components/Header/Header";
 import TestFetchComponent from "./components/TestFetchComponent";
 import PrivateUser from "./components/Login/PrivateUser";
 import PrivateRoute from "./components/Login/PrivateRoute";
-
 
 const AppContainer = styled.div`
   background: #ffffff;
@@ -21,8 +20,8 @@ const AppContainer = styled.div`
   padding: 0;
 `;
 
-const App = () => {
-  const [cartCount, setCartCount] = useState(0);
+const App: FC = () => {
+  const [cartCount, setCartCount] = useState<number>(0);
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -43,11 +42,13 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu setCartCount={setCartCount} />} />
         <Route path="/login" element={<MainLoginWrapper />} />
-        <Route path="/privateuser" element={ 
-          <PrivateRoute>
-            <PrivateUser />
-          </PrivateRoute>
-                  }
+        <Route
+          path="/privateuser"
+          element={
+            <PrivateRoute>
+              <PrivateUser />
+            </PrivateRoute>
+          }
         />
       </Routes>
       <TestFetchComponent />

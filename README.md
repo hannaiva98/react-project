@@ -1,2 +1,2 @@
-# Homework 6
-I implemented a login page using Firebase, allowing users to authenticate and gain access to protected pages. I also configured route protection through PrivateRoute, ensuring access is granted only to logged-in users.
+# Homework 7
+I added TypeScript to the app, renamed the files to .tsx, typed the states and event handlers, used React.FC for the component, enforced strong typing, and fixed all type errors so the code compiles without errors.

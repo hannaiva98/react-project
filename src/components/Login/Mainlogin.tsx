@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import backgroundImage from "./img/BG Shape Content.png";
@@ -16,10 +16,10 @@ const LoginWrapper = styled.main`
 `;
 
 const LoginUp = styled.div`
-    width: 469px;
-    height: 55px;
-    margin: 155px 485px 0px 485px;
-    text-align: center;
+  width: 469px;
+  height: 55px;
+  margin: 155px 485px 0 485px;
+  text-align: center;
 `;
 
 const LoginUpText = styled.p`
@@ -29,48 +29,48 @@ const LoginUpText = styled.p`
   line-height: 55px;
   letter-spacing: 1.65px;
   color: #35B8BE;
-  margin: 0px;
+  margin: 0;
 `;
 
 const LoginCenter = styled.form`
-    width: 695px;
-    height: 283px;
-    margin: 53px 378px 0px 378px;
-    border: 1px solid rgba(53, 184, 190, 0.15);
-    border-radius: 6px;
-    background-color: #ffffff;
+  width: 695px;
+  height: 283px;
+  margin: 53px 378px 0 378px;
+  border: 1px solid rgba(53, 184, 190, 0.15);
+  border-radius: 6px;
+  background-color: #ffffff;
 `;
 
 const LoginCenterUserInf = styled.div`
-    display: flex; 
+  display: flex;
 `;
 
 const LoginCenterUser = styled.label`
-    display: block;
-    width: 100px;
-    height: 20px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 20px;
-    letter-spacing: 0.6px;
-    color: #08090A;
-    margin-top: 49.91px;
-    margin-left: 67px;
+  display: block;
+  width: 100px;
+  height: 20px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 0.6px;
+  color: #08090A;
+  margin-top: 49.91px;
+  margin-left: 67px;
 `;
 
 const LogininputName = styled.input`
-    margin-left: 30px;
-    width: 430px;
-    height: 45px;
-    margin-top: 36.91px;
-    border: 1px solid #DDDDDD;
-    border-radius: 6px;
-    background-color: #FAFAFA;
-    opacity: 0.15px;
-    padding: 0px;    
+  margin-left: 30px;
+  width: 430px;
+  height: 45px;
+  margin-top: 36.91px;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  background-color: #FAFAFA;
+  opacity: 0.15px;
+  padding: 0;
 
-    &::placeholder{
+  &::placeholder {
     width: 125px;
     height: 27px;
     font-family: 'Inter', sans-serif;
@@ -80,35 +80,35 @@ const LogininputName = styled.input`
     letter-spacing: 0.36px;
     text-align: center;
     color: #000000;
+  }
 `;
 
 const LoginCenterPassword = styled.label`
-    display: block;
-    width: 90px;
-    height: 20px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 20px;
-    letter-spacing: 0.6px;
-    color: #08090A;
-    margin-top: 35.09px;
-    margin-left: 67px;
+  display: block;
+  width: 90px;
+  height: 20px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 0.6px;
+  color: #08090A;
+  margin-top: 35.09px;
+  margin-left: 67px;
 `;
-const LogininputPassword = styled.input`
-    margin-left: 40px;
-    width: 430px;
-    height: 45px;
-    margin-top: 25px;
-    margin-left: 40px;
-    border: 1px solid #DDDDDD;
-    border-radius: 6px;
-    background-color: #FAFAFA;
-    opacity: 0.15px;
-    padding: 0px;
-    
 
-    &::placeholder{
+const LogininputPassword = styled.input`
+  margin-left: 40px;
+  width: 430px;
+  height: 45px;
+  margin-top: 25px;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  background-color: #FAFAFA;
+  opacity: 0.15px;
+  padding: 0;
+
+  &::placeholder {
     width: 180px;
     height: 27px;
     font-family: 'Inter', sans-serif;
@@ -118,23 +118,23 @@ const LogininputPassword = styled.input`
     letter-spacing: 0.36px;
     text-align: center;
     color: #000000;
-    }
+  }
 `;
 
 const Buttons = styled.div`
-    margin-top: 37px;
-    display: flex;
+  margin-top: 37px;
+  display: flex;
 `;
 
 const ButtonSubmit = styled.button`
-    width: 147px;
-    height: 52px;
-    margin-left: 186px;
-    border: 1px;
-    border-radius: 6px;
-    background-color: #35b8be;
+  width: 147px;
+  height: 52px;
+  margin-left: 186px;
+  border: none;
+  border-radius: 6px;
+  background-color: #35b8be;
 
-    p {
+  p {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     line-height: 20px;
@@ -143,18 +143,17 @@ const ButtonSubmit = styled.button`
     margin: 0;
     color: #ffffff;
   }
-
 `;
 
 const ButtonCancel = styled.button`
-    width: 132px;
-    height: 52px;
-    margin-left: 30px;
-    border: 1px solid rgba(97, 114, 131, 0.2);
-    background-color: #ffffff;
-    border-radius: 6px;
+  width: 132px;
+  height: 52px;
+  margin-left: 30px;
+  border: 1px solid rgba(97, 114, 131, 0.2);
+  background-color: #ffffff;
+  border-radius: 6px;
 
-    p {
+  p {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 16px;
@@ -164,23 +163,22 @@ const ButtonCancel = styled.button`
     margin: 0;
     color: #222222;
   }
-
 `;
 
-const MainLogin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const MainLogin: React.FC = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const handlePasswordChange = (e) => {
+  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email || !password) {
       alert("Пожалуйста, введите email и пароль.");
@@ -192,7 +190,7 @@ const MainLogin = () => {
       localStorage.setItem("isLoggedIn", "true");
       alert("Вы вошли в систему!");
       navigate("/privateuser");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Ошибка входа в Firebase:", error.message);
       alert("Ошибка входа: " + error.message);
     }
@@ -210,8 +208,9 @@ const MainLogin = () => {
       </LoginUp>
       <LoginCenter onSubmit={handleSubmit}>
         <LoginCenterUserInf>
-          <LoginCenterUser>Email</LoginCenterUser>
+          <LoginCenterUser htmlFor="email">Email</LoginCenterUser>
           <LogininputName
+            id="email"
             type="email"
             placeholder="UserName"
             value={email}
@@ -220,8 +219,9 @@ const MainLogin = () => {
           />
         </LoginCenterUserInf>
         <LoginCenterUserInf>
-          <LoginCenterPassword>Password</LoginCenterPassword>
+          <LoginCenterPassword htmlFor="password">Password</LoginCenterPassword>
           <LogininputPassword
+            id="password"
             type="password"
             placeholder="********************"
             value={password}

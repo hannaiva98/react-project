@@ -6,13 +6,13 @@ import backgroundImage from "./img/image6.png";
 const FooterStyled = styled.footer`
   width: 100%;
   min-height: 593px;
-  background-image: ${backgroundImage ? `url(${backgroundImage})` : 'none'};
+  background-image: url(${backgroundImage});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 `;
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <FooterStyled>
       <FooterInf />
