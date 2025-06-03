@@ -1,12 +1,19 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import backgroundImage from "./img/BG Shape Content.png";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { login } from "../../redux/authSlice";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../firebase";
+import backgroundImage from "./img/BG Shape Content.png";
+import { auth } from "../../../firebase"; 
 
-const LoginWrapper = styled.main`
-  background-image: url(${backgroundImage});
+interface LoginWrapperProps {
+  bg: string;
+}
+
+const LoginWrapper = styled.main<LoginWrapperProps>`
+  background-image: url(${props => props.bg});
   display: inline-block;
   background-repeat: no-repeat;
   background-size: cover;
@@ -169,6 +176,7 @@ const MainLogin: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -187,7 +195,7 @@ const MainLogin: React.FC = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      localStorage.setItem("isLoggedIn", "true");
+      dispatch(login(email));
       alert("Вы вошли в систему!");
       navigate("/privateuser");
     } catch (error: any) {
@@ -202,7 +210,7 @@ const MainLogin: React.FC = () => {
   };
 
   return (
-    <LoginWrapper>
+    <LoginWrapper bg={backgroundImage}>
       <LoginUp>
         <LoginUpText>Log in</LoginUpText>
       </LoginUp>

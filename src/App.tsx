@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { useEffect, FC } from "react";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import Home from "./pages/Home";
@@ -21,8 +21,6 @@ const AppContainer = styled.div`
 `;
 
 const App: FC = () => {
-  const [cartCount, setCartCount] = useState<number>(0);
-
   useEffect(() => {
     const link = document.createElement("link");
     link.href =
@@ -37,11 +35,15 @@ const App: FC = () => {
 
   return (
     <AppContainer>
-      <Header cartCount={cartCount} />
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu setCartCount={setCartCount} />} />
+        <Route path="/menu" element={<Menu />} />
         <Route path="/login" element={<MainLoginWrapper />} />
+
+        {/* Добавляем роут для тестового компонента */}
+        <Route path="/testfetch" element={<TestFetchComponent />} />
+
         <Route
           path="/privateuser"
           element={
@@ -51,7 +53,6 @@ const App: FC = () => {
           }
         />
       </Routes>
-      <TestFetchComponent />
     </AppContainer>
   );
 };

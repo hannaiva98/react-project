@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
-import logostar from "./img/trustpilot-logo copy.png"; 
-import mainpic from "./img/IMAGE (5).png"; 
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const Figure = styled.div`
   padding-top: 100px;
@@ -12,7 +12,6 @@ const Figure = styled.div`
 const MainLeft = styled.div`
   padding-top: 43.06px;
   width: 600px;
-  height: auto;
 `;
 
 const FirstMainBlock = styled.p`
@@ -95,36 +94,45 @@ const ThirdMainBlock = styled.p`
 
 const MainRight = styled.div``;
 
-class Panels extends Component {
-  render() {
-    return (
-      <Figure>
-        <MainLeft>
-          <FirstMainBlock>
-            Beautiful food & takeaway, <BlueText>delivered</BlueText> to your door.
-          </FirstMainBlock>
-          <SecondMainBlock>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text ever
-            since the 1500.
-          </SecondMainBlock>
-          <MainButton disabled>
-            <p>Place an Order</p>
-          </MainButton>
-          <ScoreText>
-            <img src={logostar} alt="Trustpilot logo with stars" />
-            <LogoScoreText>
-              <HardcodedStars>4.8 out of 5&nbsp;</HardcodedStars>
-              <ThirdMainBlock>based on 2000+ reviews</ThirdMainBlock>
-            </LogoScoreText>
-          </ScoreText>
-        </MainLeft>
-        <MainRight>
-          <img src={mainpic} alt="MainPic" />
-        </MainRight>
-      </Figure>
-    );
-  }
-}
+const Panels: React.FC = () => {
+  const {
+    firstBlockText,
+    secondBlockText,
+    buttonDisabled,
+    rating,
+    reviews,
+    mainImage,
+    logoStars,
+  } = useSelector((state: RootState) => state.mainContent);
+
+  return (
+    <Figure>
+      <MainLeft>
+        <FirstMainBlock>
+          {firstBlockText.split("delivered")[0]}
+          <BlueText>delivered</BlueText>
+          {firstBlockText.split("delivered")[1]}
+        </FirstMainBlock>
+
+        <SecondMainBlock>{secondBlockText}</SecondMainBlock>
+
+        <MainButton disabled={buttonDisabled}>
+          <p>Place an Order</p>
+        </MainButton>
+
+        <ScoreText>
+          <img src={logoStars} alt="Trustpilot logo with stars" />
+          <LogoScoreText>
+            <HardcodedStars>{rating}&nbsp;</HardcodedStars>
+            <ThirdMainBlock>{reviews}</ThirdMainBlock>
+          </LogoScoreText>
+        </ScoreText>
+      </MainLeft>
+      <MainRight>
+        <img src={mainImage} alt="MainPic" />
+      </MainRight>
+    </Figure>
+  );
+};
 
 export default Panels;

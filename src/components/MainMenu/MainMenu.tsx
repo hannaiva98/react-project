@@ -1,84 +1,58 @@
-import React, { useState, useEffect } from "react";
-import "./MainMenu.css";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../redux/store";
+import { fetchMenuItems, addToCart, MenuItem } from "../../redux/menuSlice";
 import PhoneTooltip from "./PhoneTooltip";
+import "./MainMenu.css";
+import { increment } from "../../redux/cartSlice";
 
 const ITEMS_INCREMENT = 6;
-
-interface MenuItem {
-  id: string;
-  category: string;
-  meal: string;
-  price: number;
-  img: string;
-  instructions: string;
-  count: number;
-}
 
 interface MainMenuProps {
   setCartCount?: (count: number) => void;
 }
 
 const MainMenu: React.FC<MainMenuProps> = ({ setCartCount }) => {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { items, loading, error, cartCount } = useSelector(
+    (state: RootState) => state.menu
+  );
+
   const [visibleItemsCount, setVisibleItemsCount] = useState<number>(6);
   const [selectedCategory, setSelectedCategory] = useState<string>("Dessert");
 
   useEffect(() => {
-    fetch("https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Ошибка при получении данных с API");
-        }
-        return response.json();
-      })
-      .then((data: Omit<MenuItem, "count">[]) => {
-        const updatedData = data.map((item) => ({ ...item, count: 0 }));
-        setMenuItems(updatedData);
-        setIsLoading(false);
-      })
-      .catch((error: Error) => {
-        setError(error);
-        setIsLoading(false);
-      });
+    dispatch(fetchMenuItems());
+  }, [dispatch]);
 
-    fetch("https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/orders")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Загрузка заказов:", data);
-      })
-      .catch((err) => {
-        console.error("Ошибка при загрузке заказов:", err);
-      });
-  }, []);
+  useEffect(() => {
+    if (setCartCount) {
+      setCartCount(cartCount);
+    }
+  }, [cartCount, setCartCount]);
 
   const handleSeeMore = () => {
-    setVisibleItemsCount((prevCount) => prevCount + ITEMS_INCREMENT);
+    setVisibleItemsCount((prev) => prev + ITEMS_INCREMENT);
   };
 
-  const handleAddToCart = (id: string) => {
-    const updatedMenuItems = menuItems.map((item) =>
-      item.id === id ? { ...item, count: item.count + 1 } : item
-    );
-
-    const newCartCount = updatedMenuItems.reduce(
-      (total, item) => total + item.count,
-      0
-    );
-
-    if (setCartCount) {
-      setCartCount(newCartCount);
-    }
-
-    setMenuItems(updatedMenuItems);
-  };
+const handleAddToCart = (id: string) => {
+  dispatch(addToCart(id));
+  dispatch(increment());
+};
 
   const filteredItems = selectedCategory
-    ? menuItems.filter((item) => item.category === selectedCategory)
-    : menuItems;
+    ? items.filter((item) => item.category === selectedCategory)
+    : items;
 
-  if (isLoading) {
+  const visibleItems = filteredItems.slice(0, visibleItemsCount);
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setVisibleItemsCount(6);
+  };
+
+  if (loading) {
     return (
       <div className="maininfmenu">
         <p>Загрузка меню...</p>
@@ -89,17 +63,10 @@ const MainMenu: React.FC<MainMenuProps> = ({ setCartCount }) => {
   if (error) {
     return (
       <div className="maininfmenu">
-        <p>Ошибка: {error.message}</p>
+        <p>Ошибка: {error}</p>
       </div>
     );
   }
-
-  const visibleItems = filteredItems.slice(0, visibleItemsCount);
-
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
-    setVisibleItemsCount(6);
-  };
 
   return (
     <div className="maininfmenu">
@@ -113,30 +80,17 @@ const MainMenu: React.FC<MainMenuProps> = ({ setCartCount }) => {
         </div>
         <div className="buttons-with-list">
           <div className="filter-buttons">
-            <button
-              className={`main-button-menu ${
-                selectedCategory === "Dessert" ? "active" : ""
-              }`}
-              onClick={() => handleCategoryChange("Dessert")}
-            >
-              <p>Dessert</p>
-            </button>
-            <button
-              className={`main-button-menu ${
-                selectedCategory === "Dinner" ? "active" : ""
-              }`}
-              onClick={() => handleCategoryChange("Dinner")}
-            >
-              <p>Dinner</p>
-            </button>
-            <button
-              className={`main-button-menu ${
-                selectedCategory === "Breakfast" ? "active" : ""
-              }`}
-              onClick={() => handleCategoryChange("Breakfast")}
-            >
-              <p>Breakfast</p>
-            </button>
+            {["Dessert", "Dinner", "Breakfast"].map((category) => (
+              <button
+                key={category}
+                className={`main-button-menu ${
+                  selectedCategory === category ? "active" : ""
+                }`}
+                onClick={() => handleCategoryChange(category)}
+              >
+                <p>{category}</p>
+              </button>
+            ))}
           </div>
           <ul className="menu-list">
             {visibleItems.map((item) => (

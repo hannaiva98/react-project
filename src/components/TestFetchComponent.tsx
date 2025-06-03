@@ -1,34 +1,21 @@
-import React, { useState } from 'react';
-import useFetch from '../hooks/useFetch';
-
-interface Meal {
-  id: string;
-  name: string;
-  price?: number;
-  description?: string;
-}
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchMeals, Meal } from "../redux/mealsSlice";
+import type { RootState, AppDispatch } from "../redux/store";
 
 const TestFetchComponent: React.FC = () => {
-  const [shouldFetch, setShouldFetch] = useState<boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
 
-  const { data, loading, error } = useFetch(
-    'https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals',
-    shouldFetch,
-    100
+  const { data: meals, loading, error } = useSelector(
+    (state: RootState) => state.meals
   );
 
-
-  const meals = data as Meal[] | null;
-
   const handleFetch = () => {
-    setShouldFetch(true);
-    setTimeout(() => {
-      setShouldFetch(false);
-    }, 0);
+    dispatch(fetchMeals());
   };
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div style={{ padding: "20px" }}>
       <h1>Тестовый компонент</h1>
       <div>
         <button onClick={handleFetch} disabled={loading}>
@@ -36,8 +23,8 @@ const TestFetchComponent: React.FC = () => {
         </button>
       </div>
       {loading && <p>Идет загрузка...</p>}
-      {error && <p style={{ color: 'red' }}>Ошибка: {error}</p>}
-      {meals && (
+      {error && <p style={{ color: "red" }}>Ошибка: {error}</p>}
+      {meals && meals.length > 0 && (
         <div>
           <h2>Полученные данные</h2>
           <pre>{JSON.stringify(meals[0], null, 2)}</pre>
