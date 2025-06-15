@@ -8,6 +8,7 @@ import Header from "./components/Header/Header";
 import TestFetchComponent from "./components/TestFetchComponent";
 import PrivateUser from "./components/Login/PrivateUser";
 import PrivateRoute from "./components/Login/PrivateRoute";
+import OrderPage from "./pages/OrderPage"; 
 
 const AppContainer = styled.div`
   background: #ffffff;
@@ -41,7 +42,7 @@ const App: FC = () => {
         <Route path="/menu" element={<Menu />} />
         <Route path="/login" element={<MainLoginWrapper />} />
 
-        {/* Добавляем роут для тестового компонента */}
+
         <Route path="/testfetch" element={<TestFetchComponent />} />
 
         <Route
@@ -52,6 +53,14 @@ const App: FC = () => {
             </PrivateRoute>
           }
         />
+          <Route
+            path="/order"
+            element={
+          <PrivateRoute>
+          <OrderPage />
+          </PrivateRoute>
+    }
+  />
       </Routes>
     </AppContainer>
   );

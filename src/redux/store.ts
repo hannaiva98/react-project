@@ -7,6 +7,7 @@ import mainContentReducer from "./mainContentSlice";
 import mealsReducer from './mealsSlice';  
 import menuReducer from "./menuSlice";
 import tooltipReducer from "./tooltipSlice";
+import orderReducer from './orderSlice';
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
     mainContent: mainContentReducer,
     meals: mealsReducer,
     menu: menuReducer,
-    tooltip: tooltipReducer
+    tooltip: tooltipReducer,
+    orders: orderReducer,
   },
 });
 

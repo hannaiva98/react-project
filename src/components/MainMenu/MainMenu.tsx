@@ -4,7 +4,8 @@ import { RootState, AppDispatch } from "../../redux/store";
 import { fetchMenuItems, addToCart, MenuItem } from "../../redux/menuSlice";
 import PhoneTooltip from "./PhoneTooltip";
 import "./MainMenu.css";
-import { increment } from "../../redux/cartSlice";
+import { addItem } from "../../redux/cartSlice";
+import { addToOrder } from "../../redux/orderSlice";
 
 const ITEMS_INCREMENT = 6;
 
@@ -36,9 +37,20 @@ const MainMenu: React.FC<MainMenuProps> = ({ setCartCount }) => {
     setVisibleItemsCount((prev) => prev + ITEMS_INCREMENT);
   };
 
-const handleAddToCart = (id: string) => {
-  dispatch(addToCart(id));
-  dispatch(increment());
+const handleAddToCart = (item: MenuItem) => {
+  dispatch(addToOrder({
+    id: item.id,
+    name: item.meal,
+    image: item.img,
+    price: item.price
+  }));
+};
+
+const orderItems = useSelector((state: RootState) => state.orders);
+
+const getCountInOrder = (id: string) => {
+  const found = orderItems.find((item) => item.id === id);
+  return found ? found.quantity : 0;
 };
 
   const filteredItems = selectedCategory
@@ -108,10 +120,10 @@ const handleAddToCart = (id: string) => {
                       <p className="ellipsis">{item.instructions}</p>
                     </div>
                     <div className="buttons-with-counter">
-                      <button className="counter_order">{item.count}</button>
+                      <button className="counter_order">{getCountInOrder(item.id)}</button>
                       <button
                         className="add-to-order"
-                        onClick={() => handleAddToCart(item.id)}
+                        onClick={() => handleAddToCart(item)}
                       >
                         Add to cart
                       </button>
