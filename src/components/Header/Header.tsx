@@ -32,17 +32,13 @@ const NavList = styled.ul`
 
 const NavItem = styled.li`
   display: inline;
-
   a {
     text-decoration: none;
     color: #28224b;
-    font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 15px;
     line-height: 20px;
-    letter-spacing: 0px;
     padding: 20px 16px;
-
     &.active {
       color: #35b8be;
     }
@@ -67,28 +63,29 @@ const MainBasket = styled.div`
 `;
 
 const Counter = styled.span`
-  width: 25px;
-  height: 25px;
   position: absolute;
-  margin-top: -6px;
-  margin-left: 36px;
+  top: 0;
+  right: 0;
+  transform: translate(25%, -25%);
   background-color: #ffffff;
   color: #35b8be;
-  border-radius: 100px;
-  box-shadow: 7px 7px 25px 0 rgba(126, 130, 143, 0.27);
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
+  border-radius: 50%;
+  box-shadow: 7px 7px 25px rgba(126, 130, 143, 0.27);
   font-size: 13px;
-  line-height: 18px;
-  letter-spacing: 0px;
-  text-align: center;
+  width: 25px;
+  height: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const Header: React.FC = () => {
-  const cartCount = useSelector((state: RootState) => state.cart.count);
+  // вместо state.cart.count
+  const orders = useSelector((state: RootState) => state.orders);
+  const cartCount = orders.reduce((sum, item) => sum + item.quantity, 0);
+
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const userEmail = useSelector((state: RootState) => state.auth.email);
 
   return (
     <HeaderWrapper>
@@ -111,9 +108,15 @@ const Header: React.FC = () => {
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/login" className={({ isActive }) => (isActive ? "active" : "")}>
-              Login
-            </NavLink>
+            {isLoggedIn && userEmail ? (
+              <span style={{ color: "#35b8be", padding: "20px 16px" }}>
+                {userEmail.split("@")[0]}
+              </span>
+            ) : (
+              <NavLink to="/login" className={({ isActive }) => (isActive ? "active" : "")}>
+                Login
+              </NavLink>
+            )}
           </NavItem>
         </NavList>
         <BasketContainer>

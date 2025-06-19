@@ -6,8 +6,8 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  isLoggedIn: false,
-  email: null,
+  isLoggedIn: localStorage.getItem("isLoggedIn") === "true",
+  email: localStorage.getItem("email"),
 };
 
 const authSlice = createSlice({
@@ -15,13 +15,17 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action: PayloadAction<string>) => {
-      state.isLoggedIn = true;
-      state.email = action.payload;
-    },
-    logout: (state) => {
-      state.isLoggedIn = false;
-      state.email = null;
-    },
+  state.isLoggedIn = true;
+  state.email = action.payload;
+  localStorage.setItem("isLoggedIn", "true");
+  localStorage.setItem("email", action.payload);
+},
+logout: (state) => {
+  state.isLoggedIn = false;
+  state.email = null;
+  localStorage.removeItem("isLoggedIn");
+  localStorage.removeItem("email");
+},
   },
 });
 

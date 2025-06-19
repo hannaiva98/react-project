@@ -6,6 +6,7 @@ import logocopy2 from "./img/Frame (7).png";
 import logocopy3 from "./img/Frame (8).png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { Link } from 'react-router-dom';
 
 const FooterMain = styled.div`
   width: 1200px;
@@ -143,12 +144,17 @@ const FooterInf: React.FC = () => {
         </FooterInf1>
 
         <FooterMain2>
-          <FooterList>COMPANY
-            {companyLinks.map((link, index) => (
-              <FooterListItem key={index}>{link}</FooterListItem>
-            ))}
-          </FooterList>
-        </FooterMain2>
+  <FooterList>
+    COMPANY
+    {companyLinks.map((link) => (
+      <FooterListItem key={link.label}>
+        <Link to={link.href} style={{ textDecoration: "none", color: "inherit" }}>
+          {link.label}
+        </Link>
+      </FooterListItem>
+    ))}
+  </FooterList>
+</FooterMain2>
 
         <FooterMain2>
           <FooterList>TEMPLATE

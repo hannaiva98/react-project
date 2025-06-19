@@ -2,14 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface FooterState {
   backgroundImage: string;
-  companyLinks: string[];
+  companyLinks: { label: string; href: string }[];
   templateLinks: { label: string; href: string }[];
   flowbaseLinks: string[];
 }
 
 const initialState: FooterState = {
   backgroundImage: "image6.png",
-  companyLinks: ["Home", "Order", "FAQ", "Contact"],
+  companyLinks: [
+    { label: "Home", href: "/" },
+    { label: "Order", href: "/order" },
+    { label: "FAQ", href: "/faq" },
+    { label: "Contact", href: "/contact" }
+  ],
   templateLinks: [
     { label: "Style Guide", href: "https://www.google.com/" },
     { label: "Changelog", href: "https://www.google.com/" },

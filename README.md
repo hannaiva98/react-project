@@ -1,2 +1,2 @@
-# Homework 8
-Refactored all current code, implementing Redux to manage application state and process data. I organized the folder structure for Redux at my discretion, since there are no strict requirements for it.
+# Homework 9
+I implemented the order page with state management using Redux and configured routing with a private route for the order page, making it accessible only to registered users.
