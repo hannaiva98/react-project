@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import logo from "./img/IMAGE.png";
 import basket from "./img/Frame (3).png";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const HeaderWrapper = styled.header`
   font-family: 'Inter', sans-serif;
@@ -85,51 +87,44 @@ const Counter = styled.span`
   justify-content: center;
 `;
 
+const Header: React.FC = () => {
+  const cartCount = useSelector((state: RootState) => state.cart.count);
 
-interface HeaderProps {
-  cartCount: number;
-}
-
-class Header extends Component<HeaderProps> {
-  render() {
-    const { cartCount } = this.props;
-
-    return (
-      <HeaderWrapper>
-        <Nav>
-          <Logo src={logo} alt="Logo" />
-          <NavList>
-            <NavItem>
-              <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
-                Home
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to="/menu" className={({ isActive }) => (isActive ? "active" : "")}>
-                Menu
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to="/company" className={({ isActive }) => (isActive ? "active" : "")}>
-                Company
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to="/login" className={({ isActive }) => (isActive ? "active" : "")}>
-                Login
-              </NavLink>
-            </NavItem>
-          </NavList>
-          <BasketContainer>
-            <MainBasket>
-              <img src={basket} alt="Basket" />
-            </MainBasket>
-            <Counter>{cartCount}</Counter>
-          </BasketContainer>
-        </Nav>
-      </HeaderWrapper>
-    );
-  }
-}
+  return (
+    <HeaderWrapper>
+      <Nav>
+        <Logo src={logo} alt="Logo" />
+        <NavList>
+          <NavItem>
+            <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
+              Home
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/menu" className={({ isActive }) => (isActive ? "active" : "")}>
+              Menu
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/company" className={({ isActive }) => (isActive ? "active" : "")}>
+              Company
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/login" className={({ isActive }) => (isActive ? "active" : "")}>
+              Login
+            </NavLink>
+          </NavItem>
+        </NavList>
+        <BasketContainer>
+          <MainBasket>
+            <img src={basket} alt="Basket" />
+          </MainBasket>
+          <Counter>{cartCount}</Counter>
+        </BasketContainer>
+      </Nav>
+    </HeaderWrapper>
+  );
+};
 
 export default Header;

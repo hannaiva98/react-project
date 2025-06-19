@@ -4,6 +4,8 @@ import logo from "./img/IMAGE.png";
 import logocopy1 from "./img/Frame (6).png";
 import logocopy2 from "./img/Frame (7).png";
 import logocopy3 from "./img/Frame (8).png";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const FooterMain = styled.div`
   width: 1200px;
@@ -127,64 +129,60 @@ const LogoCopy3 = styled.img`
 `;
 
 const FooterInf: React.FC = () => {
+  const { companyLinks, templateLinks, flowbaseLinks } = useSelector(
+    (state: RootState) => state.footer
+  );
+
   return (
     <FooterMain>
       <FooterMain1>
         <FooterInf1>
           <LogoStyleFooter src={logo} alt="Логотип" />
-          <TextFlogo1 id="text-flogo1">Takeaway & Delivery template</TextFlogo1>
-          <TextFlogo2 id="text-flogo2">for small - medium businesses.</TextFlogo2>
+          <TextFlogo1>Takeaway & Delivery template</TextFlogo1>
+          <TextFlogo2>for small - medium businesses.</TextFlogo2>
         </FooterInf1>
+
         <FooterMain2>
-          <FooterList>company
-            <FooterListItem>Home</FooterListItem>
-            <FooterListItem>Order</FooterListItem>
-            <FooterListItem>FAQ</FooterListItem>
-            <FooterListItem>Contact</FooterListItem>
+          <FooterList>COMPANY
+            {companyLinks.map((link, index) => (
+              <FooterListItem key={index}>{link}</FooterListItem>
+            ))}
           </FooterList>
         </FooterMain2>
+
         <FooterMain2>
           <FooterList>TEMPLATE
-            <FooterListItem>
-              <FooterLink href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
-                Style Guide
-              </FooterLink>
-            </FooterListItem>
-            <FooterListItem>
-              <FooterLink href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
-                Changelog
-              </FooterLink>
-            </FooterListItem>
-            <FooterListItem>
-              <FooterLink href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
-                Licence
-              </FooterLink>
-            </FooterListItem>
-            <FooterListItem>
-              <FooterLink href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
-                Webflow University
-              </FooterLink>
-            </FooterListItem>
+            {templateLinks.map(({ label, href }, index) => (
+              <FooterListItem key={index}>
+                <FooterLink href={href} target="_blank" rel="noopener noreferrer">
+                  {label}
+                </FooterLink>
+              </FooterListItem>
+            ))}
           </FooterList>
         </FooterMain2>
+
         <FooterMain2>
           <FooterList>FLOWBASE
-            <FooterListItem>More Cloneables</FooterListItem>
+            {flowbaseLinks.map((link, index) => (
+              <FooterListItem key={index}>{link}</FooterListItem>
+            ))}
           </FooterList>
         </FooterMain2>
       </FooterMain1>
-      <Line className="line" />
+
+      <Line />
       <MainCopyright>
         <FooterCopyright>
           <p>Built by&nbsp;</p>
-          <CopyrightText className="copyrighttext">Flowbase&nbsp;</CopyrightText>
-          <p>Powered by&nbsp;</p>
-          <CopyrightText className="copyrighttext">Webflow</CopyrightText>
+          <CopyrightText>Flowbase</CopyrightText>
+          <p>&nbsp;Powered by&nbsp;</p>
+          <CopyrightText>Webflow</CopyrightText>
         </FooterCopyright>
-        <LogoCopyright className="logocopyright">
-          <LogoCopy1 src={logocopy1} alt="Логотип 1" id="logocopy1" />
-          <LogoCopy2 src={logocopy2} alt="Логотип 2" id="logocopy2" />
-          <LogoCopy3 src={logocopy3} alt="Логотип 3" id="logocopy3" />
+        <LogoCopyright>
+          <LogoCopy1 src={logocopy1} />
+          <LogoCopy2 src={logocopy2} />
+          <LogoCopy3 src={logocopy3} />
         </LogoCopyright>
       </MainCopyright>
     </FooterMain>

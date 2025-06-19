@@ -1,2 +1,2 @@
-# Homework 7
-I added TypeScript to the app, renamed the files to .tsx, typed the states and event handlers, used React.FC for the component, enforced strong typing, and fixed all type errors so the code compiles without errors.
+# Homework 8
+Refactored all current code, implementing Redux to manage application state and process data. I organized the folder structure for Redux at my discretion, since there are no strict requirements for it.

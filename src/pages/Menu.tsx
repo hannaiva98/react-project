@@ -2,14 +2,10 @@ import React, { FC } from "react";
 import MainMenu from "../components/MainMenu/MainMenu";
 import Footer from "../components/Footer/Footer";
 
-interface MenuProps {
-  setCartCount: React.Dispatch<React.SetStateAction<number>>;
-}
-
-const Menu: FC<MenuProps> = ({ setCartCount }) => {
+const Menu: FC = () => {
   return (
     <>
-      <MainMenu setCartCount={setCartCount} />
+      <MainMenu />
       <Footer />
     </>
   );
