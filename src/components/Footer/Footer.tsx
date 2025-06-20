@@ -6,13 +6,13 @@ import FooterInf from "./FooterInf";
 import image6 from "./img/image6.png"; 
 
 interface StyledFooterProps {
-  background: string;
+  $background: string;
 }
 
-const FooterStyled = styled.footer<StyledFooterProps>`
+const FooterStyled = styled.footer<{ $background: string }>`
   width: 100%;
   min-height: 593px;
-  background-image: url(${(props) => props.background});
+  background-image: var(--footer-background);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -28,8 +28,9 @@ const Footer: React.FC = () => {
     background = image6;
   }
 
-  return (
-    <FooterStyled background={background}>
+
+return (
+    <FooterStyled $background={background}> 
       <FooterInf />
     </FooterStyled>
   );

@@ -5,21 +5,17 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { login } from "../../redux/authSlice";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import backgroundImage from "./img/BG Shape Content.png";
-import { auth } from "../../../firebase"; 
+import { auth } from "../../../firebase";
 
-interface LoginWrapperProps {
-  bg: string;
-}
-
-const LoginWrapper = styled.main<LoginWrapperProps>`
-  background-image: url(${props => props.bg});
-  display: inline-block;
+const LoginWrapper = styled.main`
+  background-image: var(--login-bg-image);
+  background-color: var(--login-bg-color);
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
   height: 820px;
   opacity: 0.87;
+  transition: background 0.3s ease;
 `;
 
 const LoginUp = styled.div`
@@ -35,7 +31,7 @@ const LoginUpText = styled.p`
   font-size: 50px;
   line-height: 55px;
   letter-spacing: 1.65px;
-  color: #35B8BE;
+  color: var(--accent-color);
   margin: 0;
 `;
 
@@ -43,9 +39,10 @@ const LoginCenter = styled.form`
   width: 695px;
   height: 283px;
   margin: 53px 378px 0 378px;
-  border: 1px solid rgba(53, 184, 190, 0.15);
+  border: 1px solid var(--color-border);
   border-radius: 6px;
-  background-color: #ffffff;
+  background-color: var(--color-bg-main);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 `;
 
 const LoginCenterUserInf = styled.div`
@@ -61,9 +58,10 @@ const LoginCenterUser = styled.label`
   font-size: 18px;
   line-height: 20px;
   letter-spacing: 0.6px;
-  color: #08090A;
+  color: var(--color-text-main);
   margin-top: 49.91px;
   margin-left: 67px;
+  transition: color 0.3s ease;
 `;
 
 const LogininputName = styled.input`
@@ -71,22 +69,24 @@ const LogininputName = styled.input`
   width: 430px;
   height: 45px;
   margin-top: 36.91px;
-  border: 1px solid #DDDDDD;
+  border: 1px solid var(--input-border-color);
   border-radius: 6px;
-  background-color: #FAFAFA;
-  opacity: 0.15px;
-  padding: 0;
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  padding-left: 10px; 
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 
   &::placeholder {
-    width: 125px;
-    height: 27px;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 27px;
     letter-spacing: 0.36px;
-    text-align: center;
-    color: #000000;
+    /* text-align: center; 
+    color: var(--input-placeholder-color);
+    transition: color 0.3s ease;
   }
 `;
 
@@ -99,9 +99,10 @@ const LoginCenterPassword = styled.label`
   font-size: 18px;
   line-height: 20px;
   letter-spacing: 0.6px;
-  color: #08090A;
+  color: var(--color-text-main);
   margin-top: 35.09px;
   margin-left: 67px;
+  transition: color 0.3s ease;
 `;
 
 const LogininputPassword = styled.input`
@@ -109,24 +110,27 @@ const LogininputPassword = styled.input`
   width: 430px;
   height: 45px;
   margin-top: 25px;
-  border: 1px solid #DDDDDD;
+  border: 1px solid var(--input-border-color);
   border-radius: 6px;
-  background-color: #FAFAFA;
-  opacity: 0.15px;
-  padding: 0;
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  padding-left: 10px; /* добавлен отступ слева */
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 
   &::placeholder {
-    width: 180px;
-    height: 27px;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 27px;
     letter-spacing: 0.36px;
-    text-align: center;
-    color: #000000;
+    /* text-align: center; 
+    color: var(--input-placeholder-color);
+    transition: color 0.3s ease;
   }
 `;
+
 
 const Buttons = styled.div`
   margin-top: 37px;
@@ -139,7 +143,9 @@ const ButtonSubmit = styled.button`
   margin-left: 186px;
   border: none;
   border-radius: 6px;
-  background-color: #35b8be;
+  background-color: var(--color-button-bg);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 
   p {
     font-family: 'Inter', sans-serif;
@@ -148,7 +154,7 @@ const ButtonSubmit = styled.button`
     text-align: center;
     letter-spacing: 0%;
     margin: 0;
-    color: #ffffff;
+    color: var(--color-button-text);
   }
 `;
 
@@ -157,8 +163,10 @@ const ButtonCancel = styled.button`
   height: 52px;
   margin-left: 30px;
   border: 1px solid rgba(97, 114, 131, 0.2);
-  background-color: #ffffff;
+  background-color: var(--color-button-cancel-bg);
   border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   p {
     font-family: 'Inter', sans-serif;
@@ -168,7 +176,7 @@ const ButtonCancel = styled.button`
     text-align: center;
     letter-spacing: 0%;
     margin: 0;
-    color: #222222;
+    color: var(--color-button-cancel-text);
   }
 `;
 
@@ -210,7 +218,7 @@ const MainLogin: React.FC = () => {
   };
 
   return (
-    <LoginWrapper bg={backgroundImage}>
+    <LoginWrapper>
       <LoginUp>
         <LoginUpText>Log in</LoginUpText>
       </LoginUp>

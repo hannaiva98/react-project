@@ -8,10 +8,11 @@ import Header from "./components/Header/Header";
 import TestFetchComponent from "./components/TestFetchComponent";
 import PrivateUser from "./components/Login/PrivateUser";
 import PrivateRoute from "./components/Login/PrivateRoute";
-import OrderPage from "./pages/OrderPage"; 
+import OrderPage from "./pages/OrderPage";
+import { useTheme } from "./pages/ThemeContext";
+import GlobalStyle from "./styles/GlobalStyles";
 
 const AppContainer = styled.div`
-  background: #ffffff;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 15px;
@@ -22,7 +23,10 @@ const AppContainer = styled.div`
 `;
 
 const App: FC = () => {
+  const { theme } = useTheme();
+
   useEffect(() => {
+    // Загрузка шрифта
     const link = document.createElement("link");
     link.href =
       "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap";
@@ -34,17 +38,20 @@ const App: FC = () => {
     };
   }, []);
 
-  return (
+useEffect(() => {
+  document.documentElement.setAttribute("data-theme", theme);
+}, [theme]);
+
+return (
+  <>
+    <GlobalStyle />
     <AppContainer>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/login" element={<MainLoginWrapper />} />
-
-
         <Route path="/testfetch" element={<TestFetchComponent />} />
-
         <Route
           path="/privateuser"
           element={
@@ -53,17 +60,19 @@ const App: FC = () => {
             </PrivateRoute>
           }
         />
-          <Route
-            path="/order"
-            element={
-          <PrivateRoute>
-          <OrderPage />
-          </PrivateRoute>
-    }
-  />
+        <Route
+          path="/order"
+          element={
+            <PrivateRoute>
+              <OrderPage />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </AppContainer>
-  );
+  </>
+);
+
 };
 
 export default App;

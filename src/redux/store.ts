@@ -3,10 +3,10 @@ import cartReducer from './cartSlice';
 import footerReducer from './footerSlice';
 import authReducer from './authSlice';
 import backgroundReducer from './backgroundSlice';
-import mainContentReducer from "./mainContentSlice";
+import mainContentReducer from './mainContentSlice';
 import mealsReducer from './mealsSlice';  
-import menuReducer from "./menuSlice";
-import tooltipReducer from "./tooltipSlice";
+import menuReducer from './menuSlice';
+import tooltipReducer from './tooltipSlice';
 import orderReducer from './orderSlice';
 
 export const store = configureStore({

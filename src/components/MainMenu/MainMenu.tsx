@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../redux/store";
-import { fetchMenuItems, addToCart, MenuItem } from "../../redux/menuSlice";
+import { fetchMenuItems, MenuItem } from "../../redux/menuSlice";
 import PhoneTooltip from "./PhoneTooltip";
-import "./MainMenu.css";
-import { addItem } from "../../redux/cartSlice";
 import { addToOrder } from "../../redux/orderSlice";
+import { useTheme } from "../../pages/ThemeContext";
+import "./MainMenu.css";
 
 const ITEMS_INCREMENT = 6;
 
@@ -15,6 +15,7 @@ interface MainMenuProps {
 
 const MainMenu: React.FC<MainMenuProps> = ({ setCartCount }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const { theme } = useTheme();
 
   const { items, loading, error, cartCount } = useSelector(
     (state: RootState) => state.menu
@@ -37,21 +38,23 @@ const MainMenu: React.FC<MainMenuProps> = ({ setCartCount }) => {
     setVisibleItemsCount((prev) => prev + ITEMS_INCREMENT);
   };
 
-const handleAddToCart = (item: MenuItem) => {
-  dispatch(addToOrder({
-    id: item.id,
-    name: item.meal,
-    image: item.img,
-    price: item.price
-  }));
-};
+  const handleAddToCart = (item: MenuItem) => {
+    dispatch(
+      addToOrder({
+        id: item.id,
+        name: item.meal,
+        image: item.img,
+        price: item.price,
+      })
+    );
+  };
 
-const orderItems = useSelector((state: RootState) => state.orders);
+  const orderItems = useSelector((state: RootState) => state.orders);
 
-const getCountInOrder = (id: string) => {
-  const found = orderItems.find((item) => item.id === id);
-  return found ? found.quantity : 0;
-};
+  const getCountInOrder = (id: string) => {
+    const found = orderItems.find((item) => item.id === id);
+    return found ? found.quantity : 0;
+  };
 
   const filteredItems = selectedCategory
     ? items.filter((item) => item.category === selectedCategory)
@@ -81,12 +84,12 @@ const getCountInOrder = (id: string) => {
   }
 
   return (
-    <div className="maininfmenu">
+    <div className={`maininfmenu ${theme}`}>
       <div className="contentmenu">
-        <div className="main-text-menu">
+        <div className={`main-text-menu ${theme}`}>
           <p className="main-text-menu-1">Browse our menu</p>
           <p className="main-text-menu-2">
-            Use our menu to place an order online, or <PhoneTooltip /> our store
+            Use our menu to place an order online, or <PhoneTooltip theme={theme} /> our store
             to place a pickup order. Fast and fresh food.
           </p>
         </div>

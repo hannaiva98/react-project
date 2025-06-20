@@ -7,6 +7,7 @@ import logocopy3 from "./img/Frame (8).png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { Link } from 'react-router-dom';
+import { useTheme } from "../../pages/ThemeContext"; 
 
 const FooterMain = styled.div`
   width: 1200px;
@@ -41,7 +42,7 @@ const TextFlogo1 = styled.p`
   letter-spacing: 0.36px;
   padding-top: 25px;
   margin: 0;
-  color: #546285;
+  color: var(--footer-text-color);
 `;
 
 const TextFlogo2 = styled.p`
@@ -52,7 +53,7 @@ const TextFlogo2 = styled.p`
   line-height: 27px;
   letter-spacing: 0.36px;
   margin: 0;
-  color: #546285;
+  color: var(--footer-text-color);
 `;
 
 const FooterMain2 = styled.div`
@@ -67,7 +68,7 @@ const FooterList = styled.ul`
   margin: 0;
   list-style: none;
   text-transform: uppercase;
-  color: #08090a;
+  color: var(--footer-heading-color);
 `;
 
 const FooterListItem = styled.li`
@@ -78,7 +79,7 @@ const FooterListItem = styled.li`
   padding-top: 28px;
   text-transform: none;
   white-space: nowrap;
-  color: #546285;
+  color: var(--footer-text-color);
 `;
 
 const FooterLink = styled.a`
@@ -91,8 +92,7 @@ const Line = styled.hr`
   margin-top: 99px;
   margin-bottom: 0px;
   padding: 0px;
-  background-color: #7e828f17;
-  opacity: 9%;
+  border: 1px solid var(--footer-border-color);
 `;
 
 const MainCopyright = styled.div`
@@ -106,7 +106,7 @@ const FooterCopyright = styled.div`
   font-size: 15px;
   line-height: 20px;
   letter-spacing: 0%;
-  color: #353448;
+  color: var(--footer-text-color);
 `;
 
 const CopyrightText = styled.p`
@@ -117,19 +117,25 @@ const LogoCopyright = styled.div`
   padding-left: 717px;
 `;
 
-const LogoCopy1 = styled.img`
+const LogoCopy1 = styled.img<{ $isDark: boolean }>`
   padding-left: 12px;
+  filter: ${({ $isDark }) => ($isDark ? 'invert(1)' : 'none')};
 `;
 
-const LogoCopy2 = styled.img`
+const LogoCopy2 = styled.img<{ $isDark: boolean }>`
   padding-left: 24px;
+  filter: ${({ $isDark }) => ($isDark ? 'invert(1)' : 'none')};
 `;
 
-const LogoCopy3 = styled.img`
+const LogoCopy3 = styled.img<{ $isDark: boolean }>`
   padding-left: 24px;
+  filter: ${({ $isDark }) => ($isDark ? 'invert(1)' : 'none')};
 `;
-
 const FooterInf: React.FC = () => {
+
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   const { companyLinks, templateLinks, flowbaseLinks } = useSelector(
     (state: RootState) => state.footer
   );
@@ -144,20 +150,21 @@ const FooterInf: React.FC = () => {
         </FooterInf1>
 
         <FooterMain2>
-  <FooterList>
-    COMPANY
-    {companyLinks.map((link) => (
-      <FooterListItem key={link.label}>
-        <Link to={link.href} style={{ textDecoration: "none", color: "inherit" }}>
-          {link.label}
-        </Link>
-      </FooterListItem>
-    ))}
-  </FooterList>
-</FooterMain2>
+          <FooterList>
+            COMPANY
+            {companyLinks.map((link) => (
+              <FooterListItem key={link.label}>
+                <Link to={link.href} style={{ textDecoration: "none", color: "inherit" }}>
+                  {link.label}
+                </Link>
+              </FooterListItem>
+            ))}
+          </FooterList>
+        </FooterMain2>
 
         <FooterMain2>
-          <FooterList>TEMPLATE
+          <FooterList>
+            TEMPLATE
             {templateLinks.map(({ label, href }, index) => (
               <FooterListItem key={index}>
                 <FooterLink href={href} target="_blank" rel="noopener noreferrer">
@@ -169,7 +176,8 @@ const FooterInf: React.FC = () => {
         </FooterMain2>
 
         <FooterMain2>
-          <FooterList>FLOWBASE
+          <FooterList>
+            FLOWBASE
             {flowbaseLinks.map((link, index) => (
               <FooterListItem key={index}>{link}</FooterListItem>
             ))}
@@ -186,9 +194,11 @@ const FooterInf: React.FC = () => {
           <CopyrightText>Webflow</CopyrightText>
         </FooterCopyright>
         <LogoCopyright>
-          <LogoCopy1 src={logocopy1} />
-          <LogoCopy2 src={logocopy2} />
-          <LogoCopy3 src={logocopy3} />
+          <>
+            <LogoCopy1 $isDark={isDark} src={logocopy1} />
+            <LogoCopy2 $isDark={isDark} src={logocopy2} />
+            <LogoCopy3 $isDark={isDark} src={logocopy3} />
+          </>
         </LogoCopyright>
       </MainCopyright>
     </FooterMain>

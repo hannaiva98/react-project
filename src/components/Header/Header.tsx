@@ -5,6 +5,7 @@ import basket from "./img/Frame (3).png";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { useTheme } from "../../pages/ThemeContext";
 
 const HeaderWrapper = styled.header`
   font-family: 'Inter', sans-serif;
@@ -12,6 +13,8 @@ const HeaderWrapper = styled.header`
 
 const Nav = styled.nav`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin: 20px 120px;
 `;
 
@@ -23,18 +26,18 @@ const Logo = styled.img`
 
 const NavList = styled.ul`
   list-style: none;
-  width: 477px;
-  height: 60px;
+  display: flex;
+  align-items: center;
   padding: 0;
-  margin-left: 683px;
-  margin-right: 77px;
+  margin-left: 460px;
+  justify-content: center;
 `;
 
 const NavItem = styled.li`
   display: inline;
   a {
     text-decoration: none;
-    color: #28224b;
+    color: var(--text-color);
     font-weight: 400;
     font-size: 15px;
     line-height: 20px;
@@ -79,18 +82,45 @@ const Counter = styled.span`
   justify-content: center;
 `;
 
+const ThemeSwitchButton = styled.button`
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  border: 1px solid #35b8be;
+  border-radius: 4px;
+  color: #35b8be;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.3s;
+
+  &:hover {
+    background: #35b8be;
+    color: #fff;
+  }
+`;
+
+const RightControls = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+`;
+
 const Header: React.FC = () => {
-  // вместо state.cart.count
   const orders = useSelector((state: RootState) => state.orders);
   const cartCount = orders.reduce((sum, item) => sum + item.quantity, 0);
 
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const userEmail = useSelector((state: RootState) => state.auth.email);
 
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <HeaderWrapper>
       <Nav>
         <Logo src={logo} alt="Logo" />
+
         <NavList>
           <NavItem>
             <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
@@ -119,12 +149,19 @@ const Header: React.FC = () => {
             )}
           </NavItem>
         </NavList>
-        <BasketContainer>
-          <MainBasket>
-            <img src={basket} alt="Basket" />
-          </MainBasket>
-          <Counter>{cartCount}</Counter>
-        </BasketContainer>
+
+        <RightControls>
+          <ThemeSwitchButton onClick={toggleTheme}>
+            {theme === "dark" ? "Light mode" : "Dark mode"}
+          </ThemeSwitchButton>
+
+          <BasketContainer>
+            <MainBasket>
+              <img src={basket} alt="Basket" />
+            </MainBasket>
+            <Counter>{cartCount}</Counter>
+          </BasketContainer>
+        </RightControls>
       </Nav>
     </HeaderWrapper>
   );

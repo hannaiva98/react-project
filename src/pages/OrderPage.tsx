@@ -57,12 +57,12 @@ const OrderPage = () => {
 
               <Form onSubmit={handleSubmit}>
                 <LabelInputRow>
-                  <Label htmlFor="street" style={{ width: "100px", marginBottom: 0 }}>Street</Label>
+                  <Label htmlFor="street">Street</Label>
                   <Input id="street" type="text" required />
                 </LabelInputRow>
 
                 <LabelInputRow>
-                  <Label htmlFor="house" style={{ width: "100px", marginBottom: 0 }}>House</Label>
+                  <Label htmlFor="house">House</Label>
                   <Input id="house" type="text" required />
                 </LabelInputRow>
 
@@ -80,7 +80,7 @@ const OrderPage = () => {
 export default OrderPage;
 
 const OrderWrapper = styled.main`
-  background-image: url(${backgroundImage});
+  background-image: var(--order-bg-image);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -89,46 +89,39 @@ const OrderWrapper = styled.main`
   opacity: 0.87;
   padding: 40px 20px;
   box-sizing: border-box;
-  clip-path: polygon(
-    0% 5%,
-    100% 0%,
-    100% 100%,
-    0% 100%
-  );
+  clip-path: polygon(0% 5%, 100% 0%, 100% 100%, 0% 100%);
+  transition: background 0.3s ease;
 `;
 
 const OrderContainer = styled.div`
-  width: 100%;
   max-width: 1180px;
   margin: 0 auto;
-  background-color: #f5fbfc;
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
   padding: 40px;
   border-radius: 12px;
   box-sizing: border-box;
 `;
 
 const OrderTitle = styled.h2`
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
   font-size: 50px;
   text-align: center;
-  color: #35B8BE;
+  color: var(--accent-color);
   margin-bottom: 46px;
 `;
 
 const OrderItem = styled.div`
-  width: 1180px;
-  height: 200px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ffffff;
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
   border-radius: 6px;
   box-shadow: 0px 4px 12px rgba(53, 184, 190, 0.15);
   padding: 20px 30px;
   margin-bottom: 15px;
-  box-sizing: border-box;
 `;
+
 const OrderImage = styled.img`
   width: 120px;
   height: 120px;
@@ -137,23 +130,13 @@ const OrderImage = styled.img`
 const MealName = styled.span`
   flex: 1;
   margin-left: 30px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
   font-size: 18px;
-  line-height: 20px;
-  letter-spacing: 0.6px;
-  color: #08090A;
+  color: var(--color-text-main);
 `;
 
 const Price = styled.span`
   width: 86px;
-  height: 20px;
-  color: #35B8BE;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 20px;
-  letter-spacing: 0%;
+  color: var(--accent-color);
   margin-right: 57px;
   white-space: nowrap;
 `;
@@ -161,41 +144,24 @@ const Price = styled.span`
 const CountInput = styled.input`
   width: 60px;
   height: 45px;
-  font-family: 'Inter', sans-serif;
-  font-family: Inter;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 27px;
-  letter-spacing: 0.36px;
   text-align: center;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
-  background-color: #FAFAFA;
-  border: 1px solid #DDDDDD;
+  background-color: var(--color-input-bg);
+  color: var(--color-text-main);
   margin-right: 34px;
-  font-size: 14px;
 `;
 
 const RemoveButton = styled.button`
   width: 60px;
   height: 45px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 27px;
-  letter-spacing: 0.36px;
-  color: #FFFFFF;
-  text-align: center;
-  background-color: #35B8BE;
+  background-color: var(--color-accent);
+  color: var(--color-button-text);
   border: none;
-  color: white;
-  padding: 8px 16px;
-  cursor: pointer;
   border-radius: 6px;
-  font-size: 14px;
-
+  cursor: pointer;
   &:hover {
-    background-color: #2a969b;
+    background-color: var(--color-accent-hover);
   }
 `;
 
@@ -210,46 +176,36 @@ const LabelInputRow = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 35px;
+  gap: 12px;
 `;
 
 const Label = styled.label`
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
   font-size: 18px;
-  line-height: 20px;
-  letter-spacing: 0.6px;
-  color: #08090A;
-  margin-bottom: 8px;
+  color: var(--color-text-main);
 `;
 
 const Input = styled.input`
-  width: 430px;
+  flex: 1;
   height: 45px;
   padding: 0 12px;
   border-radius: 6px;
-  border: 1px solid #DDDDDD;
-  background-color: #FAFAFA;
-  font-size: 14px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-input-bg);
+  color: var(--color-text-main);
 `;
 
 const SubmitButton = styled.button`
-  background-color: #35B8BE;
+  background-color: var(--color-accent);
   border: none;
-  color: white;
+  color: var(--color-button-text);
   padding: 12px 40px;
   cursor: pointer;
   border-radius: 6px;
   font-size: 16px;
   display: block;
   margin: 0 auto;
-  font-family: Inter;
-  font-weight: 400;
-  font-size: 17px;
-  line-height: 20px;
-  letter-spacing: 0%;
-  color: #FFFFFF;
   &:hover {
-    background-color: #2a969b;
+    background-color: var(--color-accent-hover);
   }
 `;
 
@@ -258,5 +214,5 @@ const TotalText = styled.p`
   font-weight: 500;
   text-align: right;
   margin: 20px 0;
-  color: #000;
+  color: var(--color-text-main);
 `;

@@ -22,7 +22,7 @@ const FirstMainBlock = styled.p`
   font-size: 60px;
   line-height: 60px;
   letter-spacing: 1.8px;
-  color: #08090a;
+  color: var(--text-color);
 `;
 
 const BlueText = styled.span`
@@ -42,7 +42,7 @@ const SecondMainBlock = styled.p`
   font-size: 18px;
   line-height: 24.12px;
   letter-spacing: 0.36px;
-  color: #546285;
+  color: var(--text-color);
 `;
 
 const MainButton = styled.button`
@@ -88,7 +88,7 @@ const ThirdMainBlock = styled.p`
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   line-height: 20px;
-  color: #08090a;
+  color: var(--text-color);
   margin: 0 0 0 5px;
 `;
 
